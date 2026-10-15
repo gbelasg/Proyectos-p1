@@ -1,17 +1,31 @@
 package co.edu.uniquindio.poo.app;
 
+import co.edu.uniquindio.poo.model.Envio;
+import co.edu.uniquindio.poo.model.EnvioExpress;
+import co.edu.uniquindio.poo.model.EnvioInternacional;
+import co.edu.uniquindio.poo.model.EnvioNacional;
+
+import java.util.ArrayList;
+import java.util.List;
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     static void main() {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        IO.println(String.format("Hello and welcome!"));
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            IO.println("i = " + i);
+        List<Envio> envios= new ArrayList<>();
+
+        envios.add(new EnvioNacional("N-001", "Maria Cardona", 8, "Cartagena", true));
+        envios.add(new EnvioInternacional("I-002", "Valeria Jimenez", 4, "España", false));
+        envios.add(new EnvioExpress("E-001", "Samuel Vargas", 10, "Medellin", true, 15));
+
+        System.out.println("===LISTA ENVIOS===");
+        double total=0;
+        for (Envio envio: envios){
+            System.out.println(envio);
+            total+= envio.calcularPrecio();
         }
+        System.out.println("COBRAR: $" +total);
+
     }
 }
