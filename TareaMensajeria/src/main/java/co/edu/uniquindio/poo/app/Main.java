@@ -1,9 +1,6 @@
 package co.edu.uniquindio.poo.app;
 
-import co.edu.uniquindio.poo.model.Envio;
-import co.edu.uniquindio.poo.model.EnvioExpress;
-import co.edu.uniquindio.poo.model.EnvioInternacional;
-import co.edu.uniquindio.poo.model.EnvioNacional;
+import co.edu.uniquindio.poo.model.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,19 +10,13 @@ import java.util.List;
 public class Main {
     static void main() {
 
-        List<Envio> envios= new ArrayList<>();
+        EmpresaEnvios empresaEnvios= new EmpresaEnvios("Envios UQ");
 
-        envios.add(new EnvioNacional("N-001", "Maria Cardona", 8, "Cartagena", true));
-        envios.add(new EnvioInternacional("I-002", "Valeria Jimenez", 4, "España", false));
-        envios.add(new EnvioExpress("E-001", "Samuel Vargas", 10, "Medellin", true, 15));
+         EnvioNacional envio= new EnvioNacional("N-001", "Maria Cardona", 8, "Cartagena", true);
+         EnvioInternacional envio2= new EnvioInternacional("I-002", "Valeria Jimenez", 4, "España", false);
+        EnvioExpress envio3= new EnvioExpress("E-001", "Samuel Vargas", 10, "Medellin", true, 15);
 
         System.out.println("===LISTA ENVIOS===");
-        double total=0;
-        for (Envio envio: envios){
-            System.out.println(envio);
-            total+= envio.calcularPrecio();
-        }
-        System.out.println("COBRAR: $" +total);
 
     }
 }

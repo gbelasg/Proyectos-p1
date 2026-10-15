@@ -21,14 +21,21 @@ public class EnvioNacional extends Envio{
         return destino;
     }
 
+    public void setDestino(String destino) {
+        this.destino = destino;
+    }
+
     public boolean isDomicilio() {
         return domicilio;
     }
 
+    public void setDomicilio(boolean domicilio) {
+        this.domicilio = domicilio;
+    }
 
     @Override
     public double calcularPrecio() {
-        double costo= COSTO_FIJO +(COSTO_KG*getPesoKg());
+        double costo= COSTO_FIJO +(COSTO_KG*pesoKg);
         if (domicilio){
             costo+= RECARGO;
         }

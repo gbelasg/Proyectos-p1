@@ -1,14 +1,18 @@
 package co.edu.uniquindio.poo.model;
 
+import java.util.Optional;
+
 public abstract class  Envio {
     private String codigo;
-    private String destinatario;
-    private double pesoKg;
+    protected String destinatario;
+    protected double pesoKg;
+    private EmpresaEnvios ownedByEmpresa;
 
     public Envio(String codigo, String destinatario, double pesoKg) {
         this.codigo = codigo;
         this.destinatario = destinatario;
         this.pesoKg = pesoKg;
+        this.ownedByEmpresa= ownedByEmpresa;
     }
 
     public String getCodigo() {
@@ -34,7 +38,18 @@ public abstract class  Envio {
     public void setPesoKg(double pesoKg) {
         this.pesoKg = pesoKg;
     }
+
+    public EmpresaEnvios getOwnedByEmpresa() {
+        return ownedByEmpresa;
+    }
+
+    public void setOwnedByEmpresa(EmpresaEnvios ownedByEmpresa) {
+        this.ownedByEmpresa = ownedByEmpresa;
+    }
+
     public abstract double calcularPrecio();
+
+
 
     @Override
     public String toString() {
