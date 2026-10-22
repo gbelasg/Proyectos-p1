@@ -11,14 +11,17 @@ import java.util.Optional;
 public class Main {
     static void main() {
         Empresa empresa= new Empresa("Empresa", "2217");
+        cargarDatosPrueba(empresa);
 
         String menu = "SISTEMA DE GESTIÓN DE NOMINA\n\n" +
-                "1. Registrar nuevo empleado\n" +
-                "2. Mostrar todos los empleados\n" +
-                "3. Buscar empleado por documento\n" +
-                "4. Mostrar empleado con mayor salario neto\n" +
-                "5. Calcular nómina total de la empresa\n" +
-                "6. Mostrar resúmenes de pago (Records)\n" +
+                "1. Registrar nuevo empleado de planta\n"+
+                "2. Registrar nuevo empleado de ventas\n" +
+                "3. Registrar nuevo empleado temporal\n" +
+                "4. Mostrar todos los empleados\n" +
+                "5. Buscar empleado por documento\n" +
+                "6. Mostrar empleado con mayor salario neto\n" +
+                "7. Calcular nómina total de la empresa\n" +
+                "8. Mostrar resúmenes de pago (Records)\n" +
                 "0. Salir\n" +
                 "\n" +
                 "Ingrese el número de la opción deseada: ";
@@ -193,6 +196,29 @@ public class Main {
         }
 
         JOptionPane.showMessageDialog(null, mensaje);
+    }
+
+    //Datos de prueba
+    public static void cargarDatosPrueba(Empresa empresa) {
+        EmpleadoPlanta empPlanta = new EmpleadoPlanta(
+                "Carlos Mendoza", "1010123456", 35, 2500000.0f,
+                CategoriaEmpleado.SENIOR, 4.0f, 4.0f, "Líder de Desarrollo",
+                10, 25000.0f, 162000.0f
+        );
+
+        EmpleadoVentas empVentas = new EmpleadoVentas(
+                "Ana María Gómez", "1020654321", 28, 1300000.0f,
+                CategoriaEmpleado.SEMI_SENIOR, 4.0f, 4.0f, 15000000.0f, 5.0f
+        );
+
+        EmpleadoTemporal empTemporal = new EmpleadoTemporal(
+                "Juan Pablo Ríos", "1030987654", 22, 1300000.0f,
+                CategoriaEmpleado.JUNIOR, 4.0f, 4.0f, 15, 50000.0f
+        );
+
+        empresa.agregarEmpleado(empPlanta);
+        empresa.agregarEmpleado(empVentas);
+        empresa.agregarEmpleado(empTemporal);
     }
 
 

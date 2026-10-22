@@ -54,6 +54,30 @@ public class Empresa {
                 .filter(empleado -> empleado.getDocumento().equals(documento))
                 .findFirst();
     }
+    public boolean actualizarEmpleado(String documento, String nombreNuevo, int edadNueva, float salarioBaseNuevo, CategoriaEmpleado categoriaNueva) {
+        Optional<Empleado> empleadoEncontrado = buscarEmpleadoPorDocumento(documento);
+
+        if (empleadoEncontrado.isPresent()) {
+            Empleado empleado = empleadoEncontrado.get();
+            empleado.setNombre(nombreNuevo);
+            empleado.setEdad(edadNueva);
+            empleado.setSalarioBase(salarioBaseNuevo);
+            empleado.setCategoria(categoriaNueva);
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public String eliminarEmpleado(String documento) {
+        Optional<Empleado> empleadoEncontrado = buscarEmpleadoPorDocumento(documento);
+
+        if (empleadoEncontrado.isPresent()) {
+            empleados.remove(empleadoEncontrado.get());
+            return "Empleado eliminado correctamente.";
+        } else {
+            throw new DatosInvalidosException("No se pudo eliminar: no existe empleado con el documento " + documento);
+        }
+    }
     public List<Empleado> mostrarTodosLosEmpleados(){
         return this.empleados;
     }
