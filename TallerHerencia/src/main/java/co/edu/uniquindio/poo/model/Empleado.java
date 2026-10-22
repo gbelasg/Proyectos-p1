@@ -87,6 +87,8 @@ public  abstract class Empleado {
         this.descuentoPension = descuentoPension;
     }
 
+    //Metodos requeridos
+
     public abstract float calcularSalarioBruto();
 
     public float calcularBonificacionCategoria(){
@@ -101,9 +103,24 @@ public  abstract class Empleado {
     }
     public abstract String getTipoEmpleado();
 
+
     public ResumenPago generarResumenPago() {
         return new ResumenPago(documento, nombre, getTipoEmpleado(),
                 calcularSalarioBruto(), calcularDescuentos(), calcularSalarioNeto());
     }
 
+
+
+    @Override
+    public String toString() {
+        return "Empleado{" +
+                "nombre='" + nombre + '\'' +
+                ", documento='" + documento + '\'' +
+                ", edad=" + edad +
+                ", salarioBase=" + salarioBase +
+                ", categoria=" + categoria +
+                ", descuentoSalud=" + descuentoSalud +
+                ", descuentoPension=" + descuentoPension +
+                '}';
+    }
 }

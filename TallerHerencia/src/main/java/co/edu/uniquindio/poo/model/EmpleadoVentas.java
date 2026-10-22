@@ -8,6 +8,17 @@ public class EmpleadoVentas extends Empleado {
         super(nombre, documento, edad, salarioBase, categoria, descuentoSalud, descuentoPension);
         this.totalVentas = totalVentas;
         this.porcentajeComision = porcentajeComision;
+
+        //Validaciones
+        if (totalVentas < 0) {
+            throw new DatosInvalidosException("El total de ventas no puede ser negativo.");
+        }
+        if (porcentajeComision < 0 || porcentajeComision > 100) {
+            throw new DatosInvalidosException("El porcentaje de comisión debe estar entre 0 y 100.");
+        }
+
+        this.totalVentas = totalVentas;
+        this.porcentajeComision = porcentajeComision;
     }
     private static float validarPorcentajeComision(float porcentaje) {
         // Porcentaje entre 0 y 100.
@@ -35,6 +46,8 @@ public class EmpleadoVentas extends Empleado {
     public void setPorcentajeComision(float porcentajeComision) {
         this.porcentajeComision = porcentajeComision;
     }
+
+    //Metodos
     public float calcularComision(){
         return (totalVentas*porcentajeComision)/100;
     }
@@ -43,9 +56,11 @@ public class EmpleadoVentas extends Empleado {
     public float calcularSalarioBruto() {
         return salarioBase+calcularBonificacionCategoria()+calcularComision();
     }
+
     @Override
     public String getTipoEmpleado() {
         return "Ventas";
     }
+
 
 }

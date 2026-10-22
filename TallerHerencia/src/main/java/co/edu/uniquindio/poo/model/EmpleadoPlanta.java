@@ -12,22 +12,20 @@ public class EmpleadoPlanta extends Empleado{
         this.horasExtra = horasExtra;
         this.valorHoraExtra = valorHoraExtra;
         this.auxilioTransporte = auxilioTransporte;
-    }
-
-    private static int validarHorasExtra(int horas) {
-        // No se permiten horas extra negativas.
-        if (horas < 0) {
-            throw new IllegalArgumentException("Las horas extra no pueden ser negativas.");
+        // Validaciones: estas deben ir dentro del constructor, ademas para una mejor practicidad
+        if (horasExtra < 0) {
+            throw new DatosInvalidosException("Las horas extra no pueden ser negativas.");
         }
-        return horas;
-    }
-
-    private static float validarMontoNoNegativo(float monto, String campo) {
-        // Sirve para el valor de la hora extra y el auxilio de transporte.
-        if (monto < 0) {
-            throw new IllegalArgumentException("El " + campo + " no puede ser negativo.");
+        if (valorHoraExtra < 0) {
+            throw new DatosInvalidosException("El valor de la hora extra no puede ser negativo.");
         }
-        return monto;
+
+        this.cargo = cargo;
+        this.horasExtra = horasExtra;
+        this.valorHoraExtra = valorHoraExtra;
+        this.auxilioTransporte = auxilioTransporte;
+
+
     }
 
 
@@ -63,6 +61,8 @@ public class EmpleadoPlanta extends Empleado{
         this.auxilioTransporte = auxilioTransporte;
     }
 
+    //Metodos
+
     @Override
     public float calcularSalarioBruto() {
         float pagarHorasExtra= horasExtra*valorHoraExtra;
@@ -73,4 +73,13 @@ public class EmpleadoPlanta extends Empleado{
         return "Planta";
     }
 
+    @Override
+    public String toString() {
+        return "EmpleadoPlanta{" +
+                "cargo='" + cargo + '\'' +
+                ", horasExtra=" + horasExtra +
+                ", valorHoraExtra=" + valorHoraExtra +
+                ", auxilioTransporte=" + auxilioTransporte +
+                '}';
+    }
 }

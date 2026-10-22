@@ -9,6 +9,17 @@ public class EmpleadoTemporal extends Empleado {
         super(nombre, documento, edad, salarioBase, categoria, descuentoSalud, descuentoPension);
         this.diasTrabajados = diasTrabajados;
         this.valorDia = valorDia;
+        //Validaciones
+
+        if (diasTrabajados < 0) {
+            throw new DatosInvalidosException("Los días trabajados no pueden ser negativos.");
+        }
+        if (valorDia < 0) {
+            throw new DatosInvalidosException("El valor del día no puede ser negativo.");
+        }
+
+        this.diasTrabajados = diasTrabajados;
+        this.valorDia = valorDia;
     }
 
     private static int validarDiasTrabajados(int dias) {
@@ -43,6 +54,8 @@ public class EmpleadoTemporal extends Empleado {
         this.valorDia = valorDia;
     }
 
+    //Metodos
+
     public float calcularPagoDias(){
         return diasTrabajados*valorDia;
     }
@@ -54,5 +67,13 @@ public class EmpleadoTemporal extends Empleado {
     @Override
     public String getTipoEmpleado() {
         return "Temporal";
+    }
+
+    @Override
+    public String toString() {
+        return "EmpleadoTemporal{" +
+                "diasTrabajados=" + diasTrabajados +
+                ", valorDia=" + valorDia +
+                '}';
     }
 }
