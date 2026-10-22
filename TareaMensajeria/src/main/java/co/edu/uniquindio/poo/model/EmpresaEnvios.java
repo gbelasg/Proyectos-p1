@@ -42,7 +42,11 @@ public class EmpresaEnvios {
     }
 
     private Optional<Envio> buscarEnvio(String codigo) {
-        return listaEnvios.stream().filter(e-> e.getCodigo().equals(codigo));
+
+            return listaEnvios.stream()
+                    .filter(e -> e.getCodigo().equals(codigo))
+                    .findFirst();
+
     }
 
     @Override
