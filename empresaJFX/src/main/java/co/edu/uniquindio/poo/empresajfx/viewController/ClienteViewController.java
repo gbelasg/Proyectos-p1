@@ -15,19 +15,17 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
-
 public class ClienteViewController {
 
     ClienteController clienteController;
-    ObservableList<Cliente> listClientes= FXCollections.observableArrayList();
+    ObservableList<Cliente> listClientes = FXCollections.observableArrayList();
     Cliente selectedCliente;
 
     @FXML
-    private ResourceBundle resorces;
+    private ResourceBundle resources;
 
     @FXML
     private URL location;
-
     @FXML
     private TextField txtNombre;
 
@@ -35,13 +33,13 @@ public class ClienteViewController {
     private Button btnLimpiar;
 
     @FXML
-    private  TableView<Cliente> tblListCliente;
+    private TableView<Cliente> tblListCliente;
 
     @FXML
     private Button btnEliminar;
 
     @FXML
-    private Button btmActualizarCliente;
+    private Button btnActualizarCliente;
 
     @FXML
     private TableColumn<Cliente, String> tbcNombre;
@@ -63,117 +61,137 @@ public class ClienteViewController {
     private App app;
 
     @FXML
-    void onAgregarCliente(){
+    void onAgregarCliente() {
         agregarCliente();
     }
+
     @FXML
-    void onActualizarCliente(){
+    void onActualizarCliente() {
         actualizarCliente();
     }
+
     @FXML
-    void onLimpiar(){
+    void onLimpiar() {
         limpiarSeleccion();
     }
+
     @FXML
-    void onEliminar(){
+    void onEliminar() {
         eliminarCliente();
     }
+
     @FXML
-    void initialize(){
+    void initialize() {
         this.app=app;
-        clienteController= new ClienteController(app.empresa);
+        clienteController = new ClienteController(app.empresa);
         initView();
     }
 
-    private void initView(){
-        //Traer los datos del cliente a la tabla
+    private void initView() {
+        // Traer los datos del cliente a la tabla
         initDataBinding();
 
-        //Obtiene la lista
+        // Obtiene la lista
         obtenerClientes();
-        //Limpiar la tabla
+
+        // Limpiar la tabla
         tblListCliente.getItems().clear();
-        //Agregar los elementos a la tabla
-        tblListCliente.getItems().clear();
-        //Agregar los elementos a la tabla
+
+        // Agregar los elementos a la tabla
         tblListCliente.setItems(listClientes);
-        //Seleccionar elemento de la tabla
+
+        // Seleccionar elemento de la tabla
         listenerSelection();
     }
 
-    private void initDataBinding(){
-        tbcCedula.setCellValueFactory(cellData->new
-                SimpleStringProperty(cellData.getValue().getCedula()));
-        tbcNombre.setCellValueFactory(cellData->new
-                SimpleStringProperty(cellData.getValue().getNombre()));
-        tbcApellido.setCellValueFactory(cellData->new
-                SimpleStringProperty(cellData.getValue().getApellido()));
-        //Usamos SimpleStringProperty para manejar Double y Integer Correctamente
+    private void initDataBinding() {
+        tbcCedula.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCedula()));
+        tbcNombre.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
+        tbcApellido.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getApellido()));
+        // Usamos SimpleObjectProperty para manejar Double y Integer correctamente
     }
 
-    private void obtenerClientes(){
+    private void obtenerClientes() {
+
         listClientes.addAll(clienteController.obtenerListaClientes());
     }
 
-    private void listenerSelection(){
-        tblListCliente.getSelectionModel().selectedItemProperty().addListener((obs,
-                oldSelection, newSelection)->{
-            selectedCliente= newSelection;
+    private void listenerSelection() {
+        tblListCliente.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            selectedCliente = newSelection;
             mostrarInformacionCliente(selectedCliente);
         });
     }
 
-    private void mostrarInformacionCliente(Cliente cliente){
-        if (cliente != null){
+    private void mostrarInformacionCliente(Cliente cliente) {
+        if (cliente != null) {
             txtCedula.setText(cliente.getCedula());
             txtNombre.setText(cliente.getNombre());
             txtApellido.setText(cliente.getApellido());
         }
     }
-    private void agregarCliente(){
-        Cliente cliente= buildCliente();
-        if (clienteController.crearCliente(cliente)){
+
+    private void agregarCliente() {
+        Cliente cliente = buildCliente();
+        if (clienteController.crearCliente(cliente)) {
             listClientes.add(cliente);
             limpiarCamposCliente();
         }
     }
 
-    private Cliente buildCliente(){
-        Cliente cliente= new Cliente(txtCedula.getText(),
-                txtNombre.getText(), txtApellido.getText());
+    private Cliente buildCliente() {
+        Cliente cliente = new Cliente(txtCedula.getText(), txtNombre.getText(), txtApellido.getText());
         return cliente;
     }
-    private void eliminarCliente(){
-        if (clienteController.eliminarCliente(txtCedula.getText())){
+
+    private void eliminarCliente() {
+        if (clienteController.eliminarCliente(txtCedula.getText())) {
             listClientes.remove(selectedCliente);
-            limpiarCamposClientes();
+            limpiarCamposCliente();
             limpiarSeleccion();
         }
     }
 
-    private void actualizarCliente(){
-        if (selectedCliente != null &&
-        clienteController.actualizarCliente(selectedCliente.getCedula(),buildCliente())){
+    private void actualizarCliente() {
 
-            int index= listClientes.indexOf(selectedCliente);
-            if (index>= 0){
+        if (selectedCliente != null &&
+                clienteController.actualizarCliente(selectedCliente.getCedula(), buildCliente())) {
+
+            int index = listClientes.indexOf(selectedCliente);
+            if (index >= 0) {
                 listClientes.set(index, buildCliente());
             }
+
             tblListCliente.refresh();
             limpiarSeleccion();
             limpiarCamposCliente();
         }
     }
-    private void limpiarSeleccion(){
+
+    private void limpiarSeleccion() {
         tblListCliente.getSelectionModel().clearSelection();
         limpiarCamposCliente();
     }
-    private void limpiarCamposCliente(){
+
+    private void limpiarCamposCliente() {
         txtCedula.clear();
         txtNombre.clear();
         txtApellido.clear();
     }
-    public void setApp(App app){
-        this.app=app;
+
+    public void setApp(App app) {
+        this.app = app;
+        // Inicializamos el controlador y la vista una vez que 'app' ya no es null
+        this.clienteController = new ClienteController(app.empresa);
+        initView();
     }
+
+
 }
+
+
+
+
+
+
+

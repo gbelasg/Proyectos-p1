@@ -4,6 +4,7 @@ public class Cliente {
     private String cedula, nombre, apellido;
 
     public Cliente(String cedula, String nombre, String apellido) {
+
         this.cedula = cedula;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -33,3 +34,5 @@ public class Cliente {
         this.apellido = apellido;
     }
 }
+
+
