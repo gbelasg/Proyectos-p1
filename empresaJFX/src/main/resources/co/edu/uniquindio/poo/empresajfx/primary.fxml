@@ -1,20 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="co.edu.uniquindio.poo.empresajfx.viewController.PrimaryController">
+<VBox alignment="CENTER" prefHeight="373.0" prefWidth="475.0" spacing="20.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.empresajfx.viewController.PrimaryController">
     <children>
-        <Label text="Bienvenidos a JavaFX" />
-        <Button fx:id="primaryButton" onAction="#onOpenCrudCliente" text="Gestión de clientes" />
-        <Button fx:id="btnOpenCrudPedido" onAction="#onOpenCrudPedido" text="Gestión de pedidos" />
+        <Label text="Bienvenidos a JavaFX">
+         <font>
+            <Font size="24.0" />
+         </font></Label>
+        <Button fx:id="primaryButton" onAction="#onOpenCrudCliente" text="Gestión de clientes">
+         <font>
+            <Font size="24.0" />
+         </font></Button>
+        <Button fx:id="btnOpenCrudPedido" graphicTextGap="0.0" onAction="#onOpenCrudPedido" text="Gestión de pedidos" textAlignment="CENTER" textFill="#462828">
+         <font>
+            <Font size="24.0" />
+         </font></Button>
     </children>
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
 </VBox>
-
-
-
